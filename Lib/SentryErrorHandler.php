@@ -85,7 +85,8 @@ class SentryErrorHandler extends ErrorHandler {
      */
     public static function handleError($code, $description, $file = null,
                                        $line = null, $context = null) {
-        $e = new ErrorException($description, $code, 0, $file, $line);
+        $severity = (Configure::read('Sentry.treatErrorAsWarning') === true) ? E_WARNING : 1;
+        $e = new ErrorException($description, $code, $severity, $file, $line);;
         self::sentryCapture($e);
         return parent::handleError($code, $description, $file, $line, $context);
     }

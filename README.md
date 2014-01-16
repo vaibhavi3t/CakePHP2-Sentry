@@ -42,6 +42,8 @@ Installation
                 'email' => 'custom_email'
             )
         ),
-        'ignoredExceptions' => array('NotFoundException')
+        'ignoredExceptions' => array('NotFoundException'),
+        // Treat any Errors captured in Sentry as warnings
+        'treatErrorAsWarning' => true
     ));
 ```
