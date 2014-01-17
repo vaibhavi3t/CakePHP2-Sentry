@@ -96,7 +96,7 @@ class SentryErrorHandler extends ErrorHandler {
      */
     public static function handleException(Exception $exception) {
         // Check if the exception is not in the `ignoredExceptions` array
-        $ignoredExceptions = Configure::read('Sentry::ignoredExceptions');
+        $ignoredExceptions = Configure::read('Sentry.ignoredExceptions');
         if (!$ignoredExceptions) $ignoredExceptions = array();
         $className = get_class($exception);
         if (!in_array($className, $ignoredExceptions)) {
