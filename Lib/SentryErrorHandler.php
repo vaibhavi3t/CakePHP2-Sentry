@@ -101,7 +101,7 @@ class SentryErrorHandler extends ErrorHandler {
         $className = get_class($exception);
         if (!in_array($className, $ignoredExceptions)) {
             self::sentryCapture($exception);
-            parent::handleException($exception);
         }
+        parent::handleException($exception);
     }
 }
