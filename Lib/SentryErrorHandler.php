@@ -87,8 +87,10 @@ class SentryErrorHandler extends ErrorHandler {
                                        $line = null, $context = null) {
         $severity = (Configure::read('Sentry.treatErrorAsWarning') === true) ? E_WARNING : 1;
         $e = new ErrorException($description, $code, $severity, $file, $line);;
-        self::sentryCapture($e);
-        return parent::handleError($code, $description, $file, $line, $context);
+        // Check that Sentry has captured the error
+        if (self::sentryCapture($e))
+            return parent::handleError($code, $description, $file, $line, $context);
+        return true;
     }
 
     /**
@@ -99,9 +101,11 @@ class SentryErrorHandler extends ErrorHandler {
         $ignoredExceptions = Configure::read('Sentry.ignoredExceptions');
         if (!$ignoredExceptions) $ignoredExceptions = array();
         $className = get_class($exception);
+        $eventId = true;
         if (!in_array($className, $ignoredExceptions)) {
-            self::sentryCapture($exception);
+            $eventId = self::sentryCapture($exception);
         }
-        parent::handleException($exception);
+        if ($eventId !== null)
+            parent::handleException($exception);
     }
 }
