@@ -4,7 +4,7 @@
  */
 
 App::uses('ClassRegistry', 'Utility');
-App::import('Vendor', 'Sentry.raven/lib/Raven/Autoloader');
+App::import('Vendor', 'Sentry.sentry/lib/Raven/Autoloader');
 
 /**
  * Provides error/exception handling that logs to Sentry. There is a
