@@ -6,7 +6,7 @@ A CakePHP plugin to send errors/exceptions/logs to Sentry (getsentry.com) https:
 Installation
 ------------
 
-1. Clone the files into `app/Plugin/Sentry` (remember to also get the PHP Raven submodule - `gitsubmodule init` then `git submodule update`)
+1. Clone the files either into `app/Plugin/Sentry`or `private/plugins` (remember to also get the PHP Sentry submodule - `gitsubmodule init` then `git submodule update`)
 2. Load the plugin in `app/Config/bootstrap.php` by calling `CakePlugin::load('Sentry');`
 3. Setup the plugin as the Error/Exception handler in `app/Config/core.php`
 ```php
