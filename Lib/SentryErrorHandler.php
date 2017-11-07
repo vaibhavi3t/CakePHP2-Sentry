@@ -29,7 +29,7 @@ class SentryErrorHandler extends ErrorHandler {
      * @param Exception $exception
      * @return String|null Event id for the Sentry event
      */
-    private static function sentryCapture(Exception $exception) {
+    private static function sentryCapture($exception) {
         try {
             Raven_Autoloader::register();
             // Instantiate the client if it hasn't already been created
@@ -39,7 +39,7 @@ class SentryErrorHandler extends ErrorHandler {
                 self::$_client = new Raven_Client(Configure::read('Sentry.DSN.PHP'), $options);
             }
             self::setUserContext();
-            $event = self::$_client->captureException($exception, get_class($exception), 'PHP');
+            $event = self::$_client->captureException($exception, null, 'PHP', null);
             return self::$_client->getIdent($event);
         } catch (Exception $e) {
             parent::handleException($e);
@@ -96,7 +96,7 @@ class SentryErrorHandler extends ErrorHandler {
     /**
      * @see ErrorHandler::handleException
      */
-    public static function handleException(Exception $exception) {
+    public static function handleException($exception) {
         // Check if the exception is not in the `ignoredExceptions` array
         $ignoredExceptions = Configure::read('Sentry.ignoredExceptions');
         if (!$ignoredExceptions) $ignoredExceptions = array();
