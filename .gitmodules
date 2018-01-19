@@ -1,3 +1,0 @@
-[submodule "Vendor/sentry"]
-	path = Vendor/sentry
-	url = https://github.com/getsentry/sentry-php.git
