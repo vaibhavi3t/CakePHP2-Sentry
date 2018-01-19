@@ -1,0 +1,31 @@
+{
+  "name": "sentry-cakephp/cakephp-2",
+  "type": "cakephp-plugin",
+  "description": "Sentry integration for CakePHP 2",
+  "keywords": [
+    "log",
+    "logging",
+    "sentry",
+    "cakephp",
+    "cakephp 2"
+  ],
+  "homepage": "https://github.com/UnicornInReverse/CakePHP2-Sentry",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Maaike Koolmees",
+      "email": "maaikekoolmees@live.nl",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "ext-curl": "*",
+    "composer/installers": "~1.0"
+  },
+  "conflict": {
+    "raven/raven": "*"
+  },
+  "bin": [
+    "Vendor/sentry/bin/sentry"
+  ]
+}
