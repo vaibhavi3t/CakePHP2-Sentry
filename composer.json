@@ -20,7 +20,8 @@
   ],
   "require": {
     "ext-curl": "*",
-    "composer/installers": "~1.0"
+    "composer/installers": "~1.0",
+    "sentry/sentry": "*"
   },
   "conflict": {
     "raven/raven": "*"
