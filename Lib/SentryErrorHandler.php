@@ -54,30 +54,13 @@ class SentryErrorHandler extends ErrorHandler {
         // Clear the user context
         self::$_client->context->user = null;
 
-        // Check if the `AuthComponent` is in use for current request
-        if (class_exists('AuthComponent')) {
-            // Instantiate the user model to get valid field names
-            $modelName = Configure::read('Sentry.user.model');
-            $user = ClassRegistry::init((empty($modelName)) ? 'User' : $modelName);
-
-            // Check if the user is authenticated
-            $id = AuthComponent::user($user->primaryKey);
-            if ($id) {
-                // Check custom username field (defaults to `displayField` on `User` model)
-                $usernameField = Configure::read('Sentry.user.fieldMapping.username');
-                if (empty($usernameField)) $usernameField = $user->displayField;
-                $extraUserData = array(
-                    'username' => AuthComponent::user($usernameField)
-                );
-
-                // Get user emails
-                $emailField = Configure::read('Sentry.user.fieldMapping.email');
-                $email = (!empty($emailField)) ? AuthComponent::user($emailField) : null;
-
-                // Set the user context
-                self::$_client->set_user_data($id, $email, $extraUserData);
-            }
-        }
+        $id = null;
+        $ip = Configure::read('Sentry.user.ip');
+        $extraUserData = array(
+                        'ip' => $ip,
+                    );
+        $email = null;
+        self::$_client->set_user_data($id, $email, $extraUserData);
     }
 
     /**
